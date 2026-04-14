@@ -21,41 +21,44 @@ exports.handler = async (event) => {
     });
 
     const contactText = await contactRes.text();
-    console.log('API response status:', contactRes.status);
-    console.log('API response body:', contactText);
-
     let contact;
     try { contact = JSON.parse(contactText); } catch(e) { contact = {}; }
+
+    // Si contact existe déjà, on le met à jour
+    if (contactRes.status === 409 || (contact.violations && contact.violations.length > 0)) {
+      const searchRes = await fetch(`https://api.systeme.io/api/contacts?email=${encodeURIComponent(data.email)}`, {
+        headers: HEADERS
+      });
+      const searchData = await searchRes.json();
+      if (searchData.items && searchData.items[0]) {
+        contact = searchData.items[0];
+        await fetch(`https://api.systeme.io/api/contacts/${contact.id}`, {
+          method: 'PATCH',
+          headers: HEADERS,
+          body: JSON.stringify({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            fields: data.fields
+          })
+        });
+      }
+    }
 
     if (contact && contact.id) {
       const tagsRes = await fetch('https://api.systeme.io/api/tags?name=bilan_complete', {
         headers: HEADERS
       });
       const tagsData = await tagsRes.json();
-      console.log('Tags data:', JSON.stringify(tagsData));
       const tag = tagsData.items && tagsData.items[0];
 
       if (tag && tag.id) {
-        const tagRes = await fetch(`https://api.systeme.io/api/contacts/${contact.id}/tags`, {
+        await fetch(`https://api.systeme.io/api/contacts/${contact.id}/tags`, {
           method: 'POST',
           headers: HEADERS,
           body: JSON.stringify({ tagId: tag.id })
         });
-        console.log('Tag assigned:', tagRes.status);
       }
     }
 
     return {
-      statusCode: 200,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ success: true, contact: contact, status: contactRes.status })
-    };
-
-  } catch (err) {
-    return {
-      statusCode: 500,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ success: false, error: err.message })
-    };
-  }
-};
+      statusCode: 200
