@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilan Corps & Hormones — Analyse gratuite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c-dark:#0f0f0f;--c-mid:#1a1a1a;--c-surface:#f7f5f0;--c-accent:#c8a97e;
+  --c-text:#0f0f0f;--c-muted:#6b6b6b;--c-border:#e2ddd6;--c-white:#ffffff;
+  --r-sm:8px;--r-md:12px;--r-lg:20px;--r-xl:32px
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--c-white);color:var(--c-text);line-height:1.6}
+.page{max-width:900px;margin:0 auto}
+
+/* HERO */
+.hero-section{background:var(--c-dark);color:var(--c-white);padding:5rem 2rem 4rem;text-align:center;border-radius:0 0 var(--r-xl) var(--r-xl);margin-bottom:3rem}
+.hero-eyebrow{font-size:11px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:1.25rem}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,52px);line-height:1.15;color:var(--c-white);margin-bottom:1.25rem;max-width:640px;margin-left:auto;margin-right:auto}
+.hero-title em{font-style:italic;color:var(--c-accent)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;max-width:480px;margin:0 auto 2rem}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.hero-badge{font-size:11px;padding:5px 12px;border-radius:99px;border:0.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
+.hero-cta{display:inline-block;background:var(--c-accent);color:var(--c-dark);font-weight:500;font-size:14px;padding:14px 36px;border-radius:99px;cursor:pointer;border:none;letter-spacing:.02em;font-family:'DM Sans',sans-serif;text-decoration:none;transition:opacity .15s}
+.hero-cta:hover{opacity:.9}
+.hero-proof{font-size:12px;color:rgba(255,255,255,.3);margin-top:14px}
+
+/* BENEFITS */
+.section{padding:0 2rem;margin-bottom:3rem}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--c-accent);margin-bottom:.75rem}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);line-height:1.25;color:var(--c-text);margin-bottom:1rem}
+.section-sub{font-size:14px;color:var(--c-muted);line-height:1.7;max-width:520px}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:2rem}
+.benefit-card{background:var(--c-surface);border-radius:var(--r-lg);padding:1.5rem}
+.benefit-icon{width:36px;height:36px;border-radius:var(--r-sm);background:var(--c-dark);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.benefit-icon svg{width:16px;height:16px;stroke:var(--c-accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.benefit-title{font-size:14px;font-weight:500;color:var(--c-text);margin-bottom:6px}
+.benefit-desc{font-size:13px;color:var(--c-muted);line-height:1.6}
+
+.divider{height:0.5px;background:var(--c-border);margin:0 2rem 3rem}
+
+/* TESTIMONIALS */
+.social-proof{padding:0 2rem;margin-bottom:3rem}
+.sp-title{font-size:12px;color:var(--c-muted);text-align:center;margin-bottom:1.25rem;letter-spacing:.06em;text-transform:uppercase}
+.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sp-card{background:var(--c-surface);border-radius:var(--r-md);padding:1.25rem}
+.sp-text{font-size:13px;color:var(--c-text);line-height:1.6;margin-bottom:10px;font-style:italic}
+.sp-author{font-size:12px;color:var(--c-muted);font-weight:500}
+.stars{color:var(--c-accent);font-size:12px;margin-bottom:6px;letter-spacing:2px}
+
+/* BILAN WRAPPER */
+.bilan-wrap{background:var(--c-surface);border-radius:var(--r-xl);padding:2.5rem 2rem;margin:0 2rem 3rem}
+.bilan-header{text-align:center;margin-bottom:2rem}
+.bilan-header h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--c-text);margin-bottom:8px}
+.bilan-header p{font-size:13px;color:var(--c-muted);line-height:1.6}
+
+/* PROGRESS */
+.prog-wrap{display:flex;align-items:center;margin-bottom:2rem}
+.prog-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:0 0 auto}
+.prog-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;border:1px solid var(--c-border);color:var(--c-muted);background:var(--c-white);transition:all .2s}
+.prog-dot.act{border-color:var(--c-dark);color:var(--c-dark)}
+.prog-dot.done{background:var(--c-dark);color:var(--c-white);border-color:var(--c-dark)}
+.prog-lbl{font-size:10px;color:var(--c-muted);text-align:center;max-width:52px}
+.prog-line{flex:1;height:0.5px;background:var(--c-border);margin-bottom:14px}
+.progress-bar{height:3px;background:var(--c-border);border-radius:2px;margin-bottom:1.75rem;overflow:hidden}
+.progress-fill{height:100%;background:var(--c-dark);border-radius:2px;transition:width .4s}
+
+/* STEPS */
+.step{display:none}.step.on{display:block}
+.ax-header{margin-bottom:1.5rem}
+.ax-header h3{font-size:16px;font-weight:500;color:var(--c-text);margin-bottom:6px}
+.ax-header p{font-size:13px;color:var(--c-muted);line-height:1.6}
+.sec-lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--c-muted);margin-bottom:10px}
+
+/* FORM */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f label{font-size:12px;color:var(--c-muted)}
+.f input,.f select{height:42px;padding:0 14px;border:1px solid var(--c-border);border-radius:var(--r-sm);background:var(--c-white);color:var(--c-text);font-size:14px;font-family:'DM Sans',sans-serif;width:100%;transition:border-color .15s}
+.f input:focus,.f select:focus{outline:none;border-color:var(--c-dark)}
+.ff{grid-column:1/-1}
+.goal-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.gc{border:1px solid var(--c-border);border-radius:var(--r-md);padding:14px 16px;cursor:pointer;background:var(--c-white);transition:border-color .15s}
+.gc:hover{border-color:var(--c-dark)}
+.gc.sel{border:2px solid var(--c-dark);background:var(--c-surface)}
+.gc .gt{font-size:13px;font-weight:500;color:var(--c-text);margin-bottom:2px}
+.gc .gs{font-size:12px;color:var(--c-muted)}
+
+/* QUESTIONS */
+.q-block{margin-bottom:1.5rem}
+.q-txt{font-size:14px;color:var(--c-text);margin-bottom:10px;line-height:1.5}
+.q-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.q-opt{border:1px solid var(--c-border);border-radius:var(--r-sm);padding:12px 6px;text-align:center;cursor:pointer;font-size:12px;color:var(--c-muted);background:var(--c-white);transition:all .15s;line-height:1.3;font-family:'DM Sans',sans-serif}
+.q-opt:hover{border-color:var(--c-dark);color:var(--c-text)}
+.q-opt.sel{border:2px solid var(--c-dark);background:var(--c-dark);color:var(--c-white);font-weight:500}
+
+/* BUTTONS */
+.btn-main{width:100%;height:48px;background:var(--c-dark);color:var(--c-white);border:none;border-radius:99px;font-size:15px;font-weight:500;cursor:pointer;margin-top:10px;font-family:'DM Sans',sans-serif;letter-spacing:.02em;transition:opacity .15s}
+.btn-main:hover{opacity:.85}
+.btn-accent{width:100%;height:48px;background:var(--c-accent);color:var(--c-dark);border:none;border-radius:99px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.02em;transition:opacity .15s}
+.btn-accent:hover{opacity:.9}
+.err{font-size:12px;color:#A32D2D;margin-top:6px;display:none}
+
+/* UNLOCK */
+.unlock-inner{background:var(--c-dark);border-radius:var(--r-lg);padding:2rem;text-align:center}
+.lock-ic{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.unlock-inner h2{font-family:'DM Serif Display',serif;font-size:22px;color:var(--c-white);margin-bottom:8px}
+.unlock-inner>p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:1.25rem}
+.blur-prev{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:1.25rem;filter:blur(5px);pointer-events:none;user-select:none}
+.bp{background:rgba(255,255,255,.08);border-radius:var(--r-sm);padding:12px;text-align:center}
+.bp-l{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:4px}
+.bp-v{font-size:16px;font-weight:500;color:var(--c-white)}
+.unlock-inner .f label{color:rgba(255,255,255,.5)}
+.unlock-inner .f input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:var(--c-white)}
+.unlock-inner .f input::placeholder{color:rgba(255,255,255,.25)}
+.unlock-inner .f input:focus{border-color:var(--c-accent)}
+.privacy{font-size:11px;color:rgba(255,255,255,.25);margin-top:8px}
+
+/* RESULTS */
+.res-header{font-family:'DM Serif Display',serif;font-size:20px;color:var(--c-text);margin-bottom:1.5rem}
+.cards4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.rcard{background:var(--c-white);border:1px solid var(--c-border);border-radius:var(--r-md);padding:14px}
+.rcard.hi{border:2px solid var(--c-dark)}
+.rcard-l{font-size:11px;color:var(--c-muted);margin-bottom:4px}
+.rcard-v{font-size:20px;font-weight:500;color:var(--c-text)}
+.rcard-u{font-size:11px;color:var(--c-muted)}
+.deqt{background:var(--c-white);border:1px solid var(--c-border);border-radius:var(--r-md);padding:1rem 1.25rem;margin-bottom:1.5rem}
+.br{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.bl2{font-size:12px;color:var(--c-muted);width:44px}
+.bt{flex:1;height:6px;background:var(--c-border);border-radius:3px;overflow:hidden}
+.bf{height:100%;border-radius:3px}
+.bp2{font-size:12px;font-weight:500;color:var(--c-text);width:34px;text-align:right}
+.bk2{font-size:11px;color:var(--c-muted);width:58px;text-align:right}
+.divider-res{height:0.5px;background:var(--c-border);margin:1.25rem 0}
+.score-ring{display:flex;align-items:center;gap:1rem;background:var(--c-dark);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1.5rem}
+.ring-num{font-family:'DM Serif Display',serif;font-size:40px;color:var(--c-white);min-width:64px;text-align:center}
+.ring-info h3{font-size:15px;font-weight:500;color:var(--c-white);margin-bottom:4px}
+.ring-info p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5}
+.hor-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem}
+.hor-card{background:var(--c-white);border:1px solid var(--c-border);border-radius:var(--r-md);padding:1rem 1.25rem}
+.hor-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.hor-name{font-size:13px;font-weight:500;color:var(--c-text)}
+.pill{font-size:11px;padding:3px 9px;border-radius:99px;font-weight:500}
+.pill-ok{background:#EAF3DE;color:#3B6D11}
+.pill-warn{background:#FAEEDA;color:#854F0B}
+.pill-alert{background:#FCEBEB;color:#A32D2D}
+.hor-bar-track{height:5px;background:var(--c-border);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.hor-bar-fill{height:100%;border-radius:3px;transition:width .6s}
+.hor-score{font-size:12px;color:var(--c-muted)}
+.reco-box{background:var(--c-white);border:1px solid var(--c-border);border-radius:var(--r-md);padding:1rem 1.25rem;margin-bottom:1.5rem}
+.reco-box h3{font-size:14px;font-weight:500;color:var(--c-text);margin-bottom:10px}
+.reco-item{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.reco-dot{width:5px;height:5px;border-radius:50%;background:var(--c-accent);flex-shrink:0;margin-top:7px}
+.reco-item p{font-size:13px;color:var(--c-muted);line-height:1.6}
+.warn-note{font-size:11px;color:var(--c-muted);background:var(--c-surface);border-radius:var(--r-sm);padding:10px 12px;margin-bottom:1.5rem;line-height:1.5}
+.cta-final{background:var(--c-dark);border-radius:var(--r-lg);padding:2rem;text-align:center}
+.cta-final h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--c-white);margin-bottom:8px}
+.cta-final p{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:1.25rem;line-height:1.6}
+/* ⬇️ REMPLACE CE LIEN PAR TON VRAI LIEN SYSTEME.IO */
+.cta-final-btn{display:inline-block;background:var(--c-accent);color:var(--c-dark);font-weight:500;font-size:14px;padding:14px 36px;border-radius:99px;cursor:pointer;border:none;letter-spacing:.02em;font-family:'DM Sans',sans-serif;text-decoration:none;transition:opacity .15s}
+.cta-final-btn:hover{opacity:.9}
+
+/* FOOTER */
+.footer-section{background:var(--c-dark);padding:2.5rem 2rem;text-align:center;border-radius:var(--r-xl) var(--r-xl) 0 0;margin-top:1rem}
+.footer-section p{font-size:12px;color:rgba(255,255,255,.3);line-height:1.8}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .benefits-grid,.sp-grid{grid-template-columns:1fr}
+  .cards4,.blur-prev{grid-template-columns:1fr 1fr}
+  .hor-grid{grid-template-columns:1fr}
+  .q-opts{grid-template-columns:repeat(2,1fr)}
+  .fg,.goal-g{grid-template-columns:1fr}
+  .hero-section{padding:3rem 1.25rem 2.5rem}
+  .section,.social-proof{padding:0 1.25rem}
+  .bilan-wrap{margin:0 1rem 3rem;padding:1.75rem 1.25rem}
+  .prog-lbl{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero-section">
+    <div class="hero-eyebrow">Bilan gratuit — 3 minutes</div>
+    <h1 class="hero-title">Découvrez ce qui <em>freine vraiment</em> vos résultats</h1>
+    <p class="hero-sub">Analyse complète de votre composition corporelle et de votre profil hormonal — basée sur la physiologie, pas sur les approximations.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">Thyroïde & métabolisme</span>
+      <span class="hero-badge">Hormones sexuelles</span>
+      <span class="hero-badge">Cortisol & stress</span>
+      <span class="hero-badge">Insuline & glycémie</span>
+    </div>
+    <a href="#bilan-anchor" class="hero-cta">Faire mon bilan gratuit</a>
+    <div class="hero-proof">Déjà +200 bilans réalisés</div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="section">
+    <div class="section-label">Pourquoi ce bilan</div>
+    <h2 class="section-title">Vos hormones ont un impact direct sur vos résultats</h2>
+    <p class="section-sub">Un déficit calorique seul ne suffit pas si votre thyroïde ralentit votre métabolisme, si votre cortisol sabote votre masse musculaire, ou si votre insuline bloque la combustion des graisses.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></div>
+        <div class="benefit-title">Composition corporelle précise</div>
+        <div class="benefit-desc">Masse grasse, masse maigre et calories de maintenance calculées avec la méthode Navy + Mifflin-St Jeor.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="benefit-title">Score hormonal sur 4 axes</div>
+        <div class="benefit-desc">Thyroïde, hormones sexuelles, cortisol et insuline — évalués via 19 questions cliniques à fréquence graduée.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="benefit-title">Recommandations ciblées</div>
+        <div class="benefit-desc">Un plan d'action personnalisé selon votre profil hormonal et votre objectif — pas de conseils génériques.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TESTIMONIALS -->
+  <div class="social-proof">
+    <div class="sp-title">Ce qu'ils en disent</div>
+    <div class="sp-grid">
+      <div class="sp-card">
+        <div class="stars">★★★★★</div>
+        <div class="sp-text">"J'avais essayé plein de régimes sans résultats. Ce bilan m'a montré que mon cortisol était le vrai problème."</div>
+        <div class="sp-author">Marie L. — 34 ans</div>
+      </div>
+      <div class="sp-card">
+        <div class="stars">★★★★★</div>
+        <div class="sp-text">"En 3 minutes j'ai eu plus d'infos sur mon métabolisme que chez mon médecin. Bluffant."</div>
+        <div class="sp-author">Thomas R. — 41 ans</div>
+      </div>
+      <div class="sp-card">
+        <div class="stars">★★★★★</div>
+        <div class="sp-text">"Le score thyroïde expliquait tout. Je stagnais depuis 6 mois malgré le sport et la diète."</div>
+        <div class="sp-author">Sophie M. — 29 ans</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BILAN -->
+  <div id="bilan-anchor" class="bilan-wrap">
+    <div class="bilan-header">
+      <h2>Votre bilan corps & hormones</h2>
+      <p>Répondez aux questions ci-dessous — tout se fait en un clic, aucune frappe au clavier.</p>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-step"><div class="prog-dot act" id="d1">1</div><div class="prog-lbl">Profil</div></div>
+      <div class="prog-line"></div>
+      <div class="prog-step"><div class="prog-dot" id="d2">2</div><div class="prog-lbl">Thyroïde</div></div>
+      <div class="prog-line"></div>
+      <div class="prog-step"><div class="prog-dot" id="d3">3</div><div class="prog-lbl">Hormones</div></div>
+      <div class="prog-line"></div>
+      <div class="prog-step"><div class="prog-dot" id="d4">4</div><div class="prog-lbl">Stress</div></div>
+      <div class="prog-line"></div>
+      <div class="prog-step"><div class="prog-dot" id="d5">5</div><div class="prog-lbl">Insuline</div></div>
+      <div class="prog-line"></div>
+      <div class="prog-step"><div class="prog-dot" id="d6">6</div><div class="prog-lbl">Résultats</div></div>
+    </div>
+
+    <!-- STEP 1 : Profil -->
+    <div class="step on" id="s1">
+      <div class="progress-bar"><div class="progress-fill" style="width:16%"></div></div>
+      <div class="sec-lbl">Votre profil physique</div>
+      <div class="fg">
+        <div class="f"><label>Sexe</label><select id="sex"><option value="male">Homme</option><option value="female">Femme</option></select></div>
+        <div class="f"><label>Âge</label><input type="number" id="age" placeholder="ex: 30" min="15" max="80"></div>
+        <div class="f"><label>Poids (kg)</label><input type="number" id="wt" placeholder="ex: 80" step="0.1"></div>
+        <div class="f"><label>Taille (cm)</label><input type="number" id="ht" placeholder="ex: 175"></div>
+        <div class="f"><label>Tour de cou (cm)</label><input type="number" id="neck" placeholder="ex: 38" step="0.1"></div>
+        <div class="f"><label>Tour de taille (cm)</label><input type="number" id="waist" placeholder="ex: 80" step="0.1"></div>
+        <div class="f" id="hip-f" style="display:none"><label>Tour de hanches (cm)</label><input type="number" id="hip" placeholder="ex: 95" step="0.1"></div>
+        <div class="f ff"><label>Niveau d'activité physique</label>
+          <select id="act">
+            <option value="1.2">Sédentaire</option>
+            <option value="1.375">Légèrement actif (1–3j/sem)</option>
+            <option value="1.55" selected>Modérément actif (3–5j/sem)</option>
+            <option value="1.725">Très actif (6–7j/sem)</option>
+            <option value="1.9">Extrêmement actif</option>
+          </select>
+        </div>
+      </div>
+      <div class="sec-lbl">Votre objectif</div>
+      <div class="goal-g">
+        <div class="gc" id="g-ls" onclick="selGoal('ls')"><div class="gt">Perte légère</div><div class="gs">5 à 10 kg à perdre</div></div>
+        <div class="gc" id="g-ll" onclick="selGoal('ll')"><div class="gt">Perte importante</div><div class="gs">Plus de 10 kg à perdre</div></div>
+        <div class="gc" id="g-ma" onclick="selGoal('ma')"><div class="gt">Maintien</div><div class="gs">Stabiliser le poids actuel</div></div>
+        <div class="gc" id="g-mu" onclick="selGoal('mu')"><div class="gt">Prise de muscle</div><div class="gs">Développer la masse maigre</div></div>
+      </div>
+      <p class="err" id="e1">Merci de remplir tous les champs et de choisir un objectif.</p>
+      <button class="btn-main" onclick="toStep(2)">Continuer — Bilan thyroïde</button>
+    </div>
+
+    <!-- STEP 2 : Thyroïde -->
+    <div class="step" id="s2">
+      <div class="progress-bar"><div class="progress-fill" style="width:32%"></div></div>
+      <div class="ax-header">
+        <h3>Axe 1 — Thyroïde</h3>
+        <p>La thyroïde régule ~60% de votre métabolisme basal. Un ralentissement thyroïdien freine directement la perte de poids et la thermogenèse.</p>
+      </div>
+      <div id="q-thy"></div>
+      <p class="err" id="e2">Merci de répondre à toutes les questions.</p>
+      <button class="btn-main" onclick="toStep(3)">Continuer — Hormones sexuelles</button>
+    </div>
+
+    <!-- STEP 3 : Hormones sexuelles -->
+    <div class="step" id="s3">
+      <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
+      <div class="ax-header">
+        <h3>Axe 2 — Hormones sexuelles</h3>
+        <p>Œstrogènes, progestérone et testostérone influencent votre composition corporelle, votre récupération et votre capacité à construire du muscle.</p>
+      </div>
+      <div id="q-hor"></div>
+      <p class="err" id="e3">Merci de répondre à toutes les questions.</p>
+      <button class="btn-main" onclick="toStep(4)">Continuer — Cortisol & stress</button>
+    </div>
+
+    <!-- STEP 4 : Cortisol -->
+    <div class="step" id="s4">
+      <div class="progress-bar"><div class="progress-fill" style="width:64%"></div></div>
+      <div class="ax-header">
+        <h3>Axe 3 — Cortisol & stress</h3>
+        <p>Un cortisol chroniquement élevé inhibe la TSH, réduit la testostérone et provoque une résistance à l'insuline — trois freins majeurs à vos résultats.</p>
+      </div>
+      <div id="q-cor"></div>
+      <p class="err" id="e4">Merci de répondre à toutes les questions.</p>
+      <button class="btn-main" onclick="toStep(5)">Continuer — Insuline & glycémie</button>
+    </div>
+
+    <!-- STEP 5 : Insuline -->
+    <div class="step" id="s5">
+      <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+      <div class="ax-header">
+        <h3>Axe 4 — Insuline & glycémie</h3>
+        <p>Des pics glycémiques répétés mènent à l'hyperinsulinisme puis à la résistance à l'insuline, rendant la perte de graisse très difficile malgré les efforts.</p>
+      </div>
+      <div id="q-ins"></div>
+      <p class="err" id="e5">Merci de répondre à toutes les questions.</p>
+      <button class="btn-main" onclick="toStep(6)">Voir mes résultats</button>
+    </div>
+
+    <!-- STEP 6 : Unlock -->
+    <div class="step" id="s6">
+      <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+      <div class="unlock-inner">
+        <div class="lock-ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2>Votre bilan est prêt !</h2>
+        <p>Composition corporelle + score sur les 4 axes hormonaux avec recommandations personnalisées.</p>
+        <div class="blur-prev">
+          <div class="bp"><div class="bp-l">Masse grasse</div><div class="bp-v">-- kg</div></div>
+          <div class="bp"><div class="bp-l">Thyroïde</div><div class="bp-v">--/10</div></div>
+          <div class="bp"><div class="bp-l">Cortisol</div><div class="bp-v">--/10</div></div>
+          <div class="bp"><div class="bp-l">Insuline</div><div class="bp-v">--/10</div></div>
+        </div>
+        <div class="fg" style="text-align:left;margin-bottom:0">
+          <div class="f ff"><label>Prénom et nom</label><input type="text" id="fname" placeholder="ex: Jean Dupont"></div>
+          <div class="f ff"><label>Adresse e-mail</label><input type="email" id="femail" placeholder="ex: jean@email.com"></div>
+        </div>
+        <p class="err" id="e6" style="color:#F09595">Merci de renseigner votre nom et un email valide.</p>
+        <button class="btn-accent" onclick="showResults()" style="margin-top:14px">Débloquer mon bilan complet</button>
+        <p class="privacy">Données confidentielles — aucun spam.</p>
+      </div>
+    </div>
+
+    <!-- STEP 7 : Résultats -->
+    <div class="step" id="s7">
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <p class="res-header" id="welc-msg">Votre bilan complet</p>
+
+      <div class="sec-lbl">Composition corporelle</div>
+      <div class="cards4">
+        <div class="rcard"><div class="rcard-l">Masse grasse</div><div class="rcard-v" id="r-fat">—</div><div class="rcard-u" id="r-fatp">—</div></div>
+        <div class="rcard"><div class="rcard-l">Masse maigre</div><div class="rcard-v" id="r-lean">—</div><div class="rcard-u">kg</div></div>
+        <div class="rcard"><div class="rcard-l">Maintenance</div><div class="rcard-v" id="r-tdee">—</div><div class="rcard-u">kcal/j</div></div>
+        <div class="rcard hi"><div class="rcard-l">Cible</div><div class="rcard-v" id="r-tgt">—</div><div class="rcard-u">kcal/j</div></div>
+      </div>
+
+      <div class="deqt">
+        <div class="br"><span class="bl2">MB</span><div class="bt"><div class="bf" style="width:60%;background:#0f0f0f"></div></div><span class="bp2">60%</span><span class="bk2" id="k-mb">—</span></div>
+        <div class="br"><span class="bl2">NEAT</span><div class="bt"><div class="bf" style="width:20%;background:#444441"></div></div><span class="bp2">20%</span><span class="bk2" id="k-neat">—</span></div>
+        <div class="br"><span class="bl2">TDA</span><div class="bt"><div class="bf" style="width:10%;background:#888780"></div></div><span class="bp2">10%</span><span class="bk2" id="k-tda">—</span></div>
+        <div class="br" style="margin-bottom:0"><span class="bl2">AP</span><div class="bt"><div class="bf" style="width:5%;background:#B4B2A9"></div></div><span class="bp2">5%</span><span class="bk2" id="k-ap">—</span></div>
+      </div>
+
+      <div class="divider-res"></div>
+      <div class="sec-lbl">Bilan hormonal</div>
+
+      <div class="score-ring">
+        <div class="ring-num" id="sc-global">—</div>
+        <div class="ring-info"><h3 id="sc-label">—</h3><p id="sc-desc">—</p></div>
+      </div>
+
+      <div class="hor-grid">
+        <div class="hor-card"><div class="hor-head"><span class="hor-name">Thyroïde</span><span class="pill" id="p-thy">—</span></div><div class="hor-bar-track"><div class="hor-bar-fill" id="b-thy" style="background:#378ADD"></div></div><div class="hor-score" id="sc-thy">—</div></div>
+        <div class="hor-card"><div class="hor-head"><span class="hor-name">Hormones sexuelles</span><span class="pill" id="p-hor">—</span></div><div class="hor-bar-track"><div class="hor-bar-fill" id="b-hor" style="background:#1D9E75"></div></div><div class="hor-score" id="sc-hor">—</div></div>
+        <div class="hor-card"><div class="hor-head"><span class="hor-name">Cortisol & stress</span><span class="pill" id="p-cor">—</span></div><div class="hor-bar-track"><div class="hor-bar-fill" id="b-cor" style="background:#EF9F27"></div></div><div class="hor-score" id="sc-cor">—</div></div>
+        <div class="hor-card"><div class="hor-head"><span class="hor-name">Insuline & glycémie</span><span class="pill" id="p-ins">—</span></div><div class="hor-bar-track"><div class="hor-bar-fill" id="b-ins" style="background:#D4537E"></div></div><div class="hor-score" id="sc-ins">—</div></div>
+      </div>
+
+      <div class="reco-box"><h3>Recommandations personnalisées</h3><div id="reco-list"></div></div>
+
+      <div class="warn-note">Ce bilan est basé sur vos symptômes déclarés — il ne remplace pas un bilan sanguin (TSH, FT3, FT4, glycémie à jeun). Il constitue un point de départ pour un accompagnement personnalisé.</div>
+
+      <div class="cta-final">
+        <h3>Passez à l'étape suivante</h3>
+        <p>Votre profil hormonal est identifié. Un plan alimentaire sur-mesure peut maintenant être construit autour de vos vrais freins.</p>
+        
+        <a href="https://calendly.com/stevens-coaching/appel-de-decouverte" class="cta-final-btn">Je veux des solutions personnalisées</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-section">
+    <p>Ce bilan est fourni à titre informatif et éducatif.<br>Il ne constitue pas un avis médical et ne remplace pas une consultation avec un professionnel de santé.<br><br>
+    
+    © 2025 — Stevens Coaching</p>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// CONFIGURATION SYSTEME.IO
+// ============================================================
+const SYSTEMEIO_API_KEY = 'ud62nchxmnnj05agbbsfojdt98haiwd5esefrtn50bdmz35i6f4tjxissn40u4g8';
+const OFFRE_URL = 'https://calendly.com/stevens-coaching/appel-de-decouverte';
+
+// ============================================================
+// DONNÉES & LOGIQUE
+// ============================================================
+let goal = null, answers = {};
+const OPTS = ['Jamais','Parfois','Souvent','Toujours'];
+
+const QUESTIONS = {
+  thy: [
+    {id:'t1', q:'Vous sentez-vous fatigué(e) même après une nuit de sommeil complète ?'},
+    {id:'t2', q:'Ressentez-vous une frilosité excessive (mains/pieds froids, inconfort au froid) ?'},
+    {id:'t3', q:'Avez-vous tendance à prendre du poids facilement sans changement alimentaire ?'},
+    {id:'t4', q:'Souffrez-vous de transit lent, constipation ou digestion ralentie ?'},
+    {id:'t5', q:'Observez-vous une chute de cheveux, des cheveux secs ou une peau sèche ?'}
+  ],
+  hor: [
+    {id:'h1', q:'Ressentez-vous une baisse de libido ou un désintérêt pour la sexualité ?'},
+    {id:'h2', q:'Avez-vous du mal à développer ou maintenir votre masse musculaire ?'},
+    {id:'h3', q:'Souffrez-vous de sautes d\'humeur, d\'irritabilité ou d\'anxiété fréquentes ?'},
+    {id:'h4', q:'Observez-vous un stockage de graisse abdominal difficile à éliminer ?'},
+    {id:'h5', q:'Votre récupération après l\'effort vous semble-t-elle lente ou insuffisante ?'}
+  ],
+  cor: [
+    {id:'c1', q:'Avez-vous des difficultés à vous endormir ou des réveils nocturnes fréquents ?'},
+    {id:'c2', q:'Ressentez-vous un état de stress, d\'anxiété ou d\'alerte permanente ?'},
+    {id:'c3', q:'Avez-vous des envies intenses de sucré ou de salé (cravings) ?'},
+    {id:'c4', q:'Souffrez-vous d\'épuisement mental, de "burn-out" ou de manque de concentration ?'},
+    {id:'c5', q:'Votre énergie est-elle plus élevée le soir que le matin ?'}
+  ],
+  ins: [
+    {id:'i1', q:'Avez-vous du mal à vous sentir rassasié(e) après les repas ?'},
+    {id:'i2', q:'Ressentez-vous un coup de fatigue ou un "brouillard mental" après avoir mangé ?'},
+    {id:'i3', q:'Avez-vous des fringales récurrentes, notamment sucrées en milieu d\'après-midi ?'},
+    {id:'i4', q:'Malgré vos efforts, avez-vous du mal à perdre de la graisse abdominale ?'}
+  ]
+};
+
+function renderQ(axe, cId) {
+  const c = document.getElementById(cId);
+  c.innerHTML = QUESTIONS[axe].map(({id, q}) =>
+    `<div class="q-block">
+      <div class="q-txt">${q}</div>
+      <div class="q-opts">
+        ${OPTS.map((o, i) => `<div class="q-opt" id="opt-${id}-${i}" onclick="selOpt('${id}',${i})">${o}</div>`).join('')}
+      </div>
+    </div>`
+  ).join('');
+}
+
+function selOpt(id, val) {
+  answers[id] = val;
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById(`opt-${id}-${i}`);
+    if (el) el.classList.toggle('sel', i === val);
+  }
+}
+
+function allAns(axe) {
+  return QUESTIONS[axe].every(({id}) => answers[id] !== undefined);
+}
+
+document.getElementById('sex').addEventListener('change', function() {
+  document.getElementById('hip-f').style.display = this.value === 'female' ? 'block' : 'none';
+});
+
+function selGoal(g) {
+  goal = g;
+  ['ls','ll','ma','mu'].forEach(id => document.getElementById('g-'+id).classList.toggle('sel', id === g));
+}
+
+function setStep(n) {
+  for (let i = 1; i <= 7; i++) {
+    const s = document.getElementById('s'+i);
+    if (s) s.classList.toggle('on', i === n);
+  }
+  for (let i = 1; i <= 6; i++) {
+    const d = document.getElementById('d'+i);
+    if (!d) continue;
+    d.classList.remove('act','done');
+    if (i < n) d.classList.add('done');
+    else if (i === n) d.classList.add('act');
+  }
+  document.getElementById('bilan-anchor').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function toStep(n) {
+  if (n === 2) {
+    const sex = document.getElementById('sex').value;
+    const vals = [
+      document.getElementById('age').value,
+      document.getElementById('wt').value,
+      document.getElementById('ht').value,
+      document.getElementById('neck').value,
+      document.getElementById('waist').value
+    ];
+    if (sex === 'female') vals.push(document.getElementById('hip').value);
+    if (vals.some(v => !v) || !goal) { document.getElementById('e1').style.display='block'; return; }
+    document.getElementById('e1').style.display = 'none';
+    renderQ('thy','q-thy');
+  }
+  if (n === 3) { if (!allAns('thy')) { document.getElementById('e2').style.display='block'; return; } document.getElementById('e2').style.display='none'; renderQ('hor','q-hor'); }
+  if (n === 4) { if (!allAns('hor')) { document.getElementById('e3').style.display='block'; return; } document.getElementById('e3').style.display='none'; renderQ('cor','q-cor'); }
+  if (n === 5) { if (!allAns('cor')) { document.getElementById('e4').style.display='block'; return; } document.getElementById('e4').style.display='none'; renderQ('ins','q-ins'); }
+  if (n === 6) { if (!allAns('ins')) { document.getElementById('e5').style.display='block'; return; } document.getElementById('e5').style.display='none'; }
+  setStep(n);
+}
+
+function axeScore(axe) { return QUESTIONS[axe].reduce((s,{id}) => s + (answers[id]||0), 0); }
+function axeMax(axe) { return QUESTIONS[axe].length * 3; }
+
+function setPill(id, s, max) {
+  const r = s / max;
+  const [cls, txt] = r < 0.25 ? ['pill-ok','Optimal'] : r < 0.6 ? ['pill-warn','À surveiller'] : ['pill-alert','Attention'];
+  const el = document.getElementById(id); el.className = 'pill '+cls; el.textContent = txt;
+}
+function setBar(id, s, max) { document.getElementById(id).style.width = Math.round((s/max)*100)+'%'; }
+
+function showResults() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('e6').style.display='block'; return; }
+  document.getElementById('e6').style.display = 'none';
+  compute(name, email);
+  setStep(7);
+}
+
+function compute(name, email) {
+  const sex = document.getElementById('sex').value;
+  const age = parseFloat(document.getElementById('age').value);
+  const wt  = parseFloat(document.getElementById('wt').value);
+  const ht  = parseFloat(document.getElementById('ht').value);
+  const neck  = parseFloat(document.getElementById('neck').value);
+  const waist = parseFloat(document.getElementById('waist').value);
+  const hip   = parseFloat(document.getElementById('hip').value) || 0;
+  const act   = parseFloat(document.getElementById('act').value);
+
+  let bfp = sex === 'male'
+    ? 495 / (1.0324 - 0.19077*Math.log10(waist-neck) + 0.15456*Math.log10(ht)) - 450
+    : 495 / (1.29579 - 0.35004*Math.log10(waist+hip-neck) + 0.22100*Math.log10(ht)) - 450;
+  bfp = Math.max(3, Math.min(60, bfp));
+  const fat = wt*(bfp/100), lean = wt-fat;
+  let bmr = sex === 'male' ? 10*wt+6.25*ht-5*age+5 : 10*wt+6.25*ht-5*age-161;
+  const tdee = Math.round(bmr*act); bmr = Math.round(bmr);
+  const deltas = {'ls':-400,'ll':-700,'ma':0,'mu':250};
+  const tgt = tdee + (deltas[goal]||0);
+
+  const fn = name.split(' ')[0];
+  document.getElementById('welc-msg').textContent = 'Voici votre bilan complet, '+fn+' !';
+  document.getElementById('r-fat').textContent = fat.toFixed(1)+' kg';
+  document.getElementById('r-fatp').textContent = bfp.toFixed(1)+'% MG';
+  document.getElementById('r-lean').textContent = lean.toFixed(1);
+  document.getElementById('r-tdee').textContent = tdee.toLocaleString('fr-FR');
+  document.getElementById('r-tgt').textContent = tgt.toLocaleString('fr-FR');
+  document.getElementById('k-mb').textContent = bmr+' kcal';
+  document.getElementById('k-neat').textContent = Math.round(tdee*.20)+' kcal';
+  document.getElementById('k-tda').textContent = Math.round(tdee*.10)+' kcal';
+  document.getElementById('k-ap').textContent = Math.round(tdee*.05)+' kcal';
+
+  const st=axeScore('thy'),mt=axeMax('thy');
+  const sh=axeScore('hor'),mh=axeMax('hor');
+  const sc=axeScore('cor'),mc=axeMax('cor');
+  const si=axeScore('ins'),mi=axeMax('ins');
+
+  setPill('p-thy',st,mt); setBar('b-thy',st,mt);
+  setPill('p-hor',sh,mh); setBar('b-hor',sh,mh);
+  setPill('p-cor',sc,mc); setBar('b-cor',sc,mc);
+  setPill('p-ins',si,mi); setBar('b-ins',si,mi);
+
+  const lbA = (s,max,a,b) => s/max < 0.5 ? a : b;
+  document.getElementById('sc-thy').textContent = lbA(st,mt,'Thyroïde équilibrée','Signaux thyroïdiens présents');
+  document.getElementById('sc-hor').textContent = lbA(sh,mh,'Hormones équilibrées','Déséquilibre hormonal détecté');
+  document.getElementById('sc-cor').textContent = lbA(sc,mc,'Stress bien géré','Charge de stress importante');
+  document.getElementById('sc-ins').textContent = lbA(si,mi,'Glycémie stable','Instabilité glycémique détectée');
+
+  const total = st+sh+sc+si, totalMax = mt+mh+mc+mi;
+  const gs = Math.round((1-total/totalMax)*10);
+  document.getElementById('sc-global').textContent = gs+'/10';
+  const [lbl,desc] = gs>=8
+    ? ['Profil hormonal favorable','Votre équilibre hormonal est globalement bon. Maintenez vos habitudes et restez attentif à la gestion du stress.']
+    : gs>=5
+    ? ['Quelques axes à optimiser','Des déséquilibres modérés sont présents. Un accompagnement ciblé peut significativement améliorer vos résultats.']
+    : ['Déséquilibres significatifs','Votre profil suggère une charge hormonale qui freine probablement vos progrès. Un suivi personnalisé est fortement recommandé.'];
+  document.getElementById('sc-label').textContent = lbl;
+  document.getElementById('sc-desc').textContent = desc;
+
+  const recos = [];
+  if (st/mt>=0.6) recos.push('Thyroïde : vos réponses évoquent une hypothyroïdie subclinique. Priorité aux nutriments clés : sélénium (200 mcg/j), zinc, iode et vitamine D. Un bilan TSH/FT3/FT4 est conseillé.');
+  else if (st/mt>=0.35) recos.push('Thyroïde : quelques signaux à surveiller. Veillez à un bon apport en tyrosine (protéines animales) et en iode pour soutenir la synthèse hormonale.');
+  if (sc/mc>=0.6) recos.push('Cortisol : votre axe de stress (HPS) semble surchargé — il inhibe la TSH, réduit la testostérone et favorise la résistance à l\'insuline. Priorité : qualité du sommeil, éviter les déficits caloriques agressifs.');
+  else if (sc/mc>=0.35) recos.push('Cortisol : niveau de stress modéré. Intégrez des pratiques de récupération (7–9h de sommeil, marches, respiration) pour éviter la surcharge allostatique.');
+  if (sh/mh>=0.6) recos.push('Hormones sexuelles : signes de déséquilibre. Assurez un apport en zinc, vitamine D et lipides essentiels. Évitez les restrictions caloriques trop sévères qui diminuent la production hormonale.');
+  if (si/mi>=0.6) recos.push('Insuline : profil évocateur d\'hyperinsulinisme. Réduisez les glucides raffinés, augmentez fibres et protéines, et intégrez de la musculation 3x/semaine pour activer le GLUT-4.');
+  else if (si/mi>=0.35) recos.push('Insuline : sensibilité à améliorer. Privilégiez les glucides complexes autour de l\'entraînement et des marches post-repas.');
+  if (sc/mc>=0.5 && si/mi>=0.5) recos.push('Interaction cortisol–insuline : le stress chronique réduit directement la sensibilité cellulaire à l\'insuline. Travailler ces deux axes simultanément est votre priorité n°1.');
+  if (goal==='ls'||goal==='ll') recos.push('Pour votre objectif de perte de poids, un déficit modéré (−400 kcal max) sera plus efficace qu\'un déficit agressif avec ce profil. Protéines à 1.8–2.2g/kg pour préserver la masse maigre.');
+  if (goal==='mu') recos.push('Pour la prise de muscle, le surplus de 250 kcal + musculation 3–4x/semaine activera le GLUT-4 et améliorera votre sensibilité à l\'insuline.');
+  if (recos.length===0) recos.push('Votre profil hormonal est bien équilibré. Maintenez la qualité du sommeil, la gestion du stress et un entraînement régulier.');
+
+  document.getElementById('reco-list').innerHTML = recos.map(r =>
+    `<div class="reco-item"><div class="reco-dot"></div><p>${r}</p></div>`
+  ).join('');
+
+  // ============================================================
+  // ENVOI VERS SYSTEME.IO
+  // Toutes les données du prospect sont envoyées au webhook
+  // ============================================================
+  const goalLabels = {'ls':'Perte légère (5–10 kg)','ll':'Perte importante (+10 kg)','ma':'Maintien','mu':'Prise de muscle'};
+  const scoreLabels = {
+    thy: document.getElementById('sc-thy').textContent,
+    hor: document.getElementById('sc-hor').textContent,
+    cor: document.getElementById('sc-cor').textContent,
+    ins: document.getElementById('sc-ins').textContent
+  };
+  const actLabels = {'1.2':'Sédentaire','1.375':'Légèrement actif','1.55':'Modérément actif','1.725':'Très actif','1.9':'Extrêmement actif'};
+
+  const payload = {
+    // Coordonnées
+    prenom: name.split(' ')[0],
+    nom: name.split(' ').slice(1).join(' '),
+    email: email,
+    // Profil physique
+    sexe: sex === 'male' ? 'Homme' : 'Femme',
+    age: age,
+    poids_kg: wt,
+    taille_cm: ht,
+    activite: actLabels[String(act)] || '',
+    objectif: goalLabels[goal] || '',
+    // Composition corporelle
+    masse_grasse_kg: parseFloat(fat.toFixed(1)),
+    masse_grasse_pct: parseFloat(bfp.toFixed(1)),
+    masse_maigre_kg: parseFloat(lean.toFixed(1)),
+    calories_maintenance: tdee,
+    calories_cible: tgt,
+    // Scores hormonaux (0–15 max par axe)
+    score_thyroide: st,
+    score_thyroide_max: mt,
+    score_hormones: sh,
+    score_hormones_max: mh,
+    score_cortisol: sc,
+    score_cortisol_max: mc,
+    score_insuline: si,
+    score_insuline_max: mi,
+    score_global_sur_10: gs,
+    // Statuts
+    statut_thyroide: scoreLabels.thy,
+    statut_hormones: scoreLabels.hor,
+    statut_cortisol: scoreLabels.cor,
+    statut_insuline: scoreLabels.ins,
+    statut_global: lbl,
+    // Tags Systeme.io (utiles pour les automations)
+    tag_objectif: goal,
+    tag_thyroide: st/mt>=0.6?'alert':st/mt>=0.35?'watch':'ok',
+    tag_cortisol: sc/mc>=0.6?'alert':sc/mc>=0.35?'watch':'ok',
+    tag_insuline: si/mi>=0.6?'alert':si/mi>=0.35?'watch':'ok',
+    tag_hormones: sh/mh>=0.6?'alert':sh/mh>=0.35?'watch':'ok',
+    // Recommandations (texte brut pour l'email de suivi)
+    recommandations: recos.join(' | '),
+    // Métadonnées
+    date_bilan: new Date().toLocaleDateString('fr-FR'),
+    source: 'landing_bilan_hormonal'
+  };
+
+  // 1. Créer ou mettre à jour le contact
+  const contactPayload = {
+    email: email,
+    first_name: name.split(' ')[0],
+    last_name: name.split(' ').slice(1).join(' '),
+    fields: [
+      { slug: 'objectif', value: goalLabels[goal] || '' },
+      { slug: 'masse_grasse_kg', value: String(parseFloat(fat.toFixed(1))) },
+      { slug: 'masse_grasse_pct', value: String(parseFloat(bfp.toFixed(1))) },
+      { slug: 'masse_maigre_kg', value: String(parseFloat(lean.toFixed(1))) },
+      { slug: 'calories_maintenance', value: String(tdee) },
+      { slug: 'calories_cible', value: String(tgt) },
+      { slug: 'score_thyroide', value: String(st) },
+      { slug: 'score_cortisol', value: String(sc) },
+      { slug: 'score_insuline', value: String(si) },
+      { slug: 'score_hormones', value: String(sh) },
+      { slug: 'score_global_sur_10', value: String(gs) },
+      { slug: 'statut_thyroide', value: scoreLabels.thy },
+      { slug: 'statut_cortisol', value: scoreLabels.cor },
+      { slug: 'statut_global', value: lbl },
+      { slug: 'recommandations', value: recos.join(' | ').substring(0, 255) },
+      { slug: 'tag_objectif', value: goal }
+    ]
+  };
+
+  fetch('/.netlify/functions/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(contactPayload)
+  })
+  .then(r => r.json())
+  .then(res => console.log('Contact créé:', res))
+  .catch(err => console.log('Contact error:', err));
+}
+</script>
+</body>
+</html>
